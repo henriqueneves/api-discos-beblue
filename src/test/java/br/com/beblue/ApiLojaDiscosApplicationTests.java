@@ -1,4 +1,4 @@
-package br.com.beblue.apilojadiscos;
+package br.com.beblue;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
