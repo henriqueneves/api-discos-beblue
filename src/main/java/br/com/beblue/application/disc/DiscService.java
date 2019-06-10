@@ -1,4 +1,10 @@
 package br.com.beblue.application.disc;
 
-public class DiscService {
+import br.com.beblue.application.disc.dto.DiscDTO;
+
+public interface DiscService {
+
+    DiscDTO findById(Long id);
+
+
 }

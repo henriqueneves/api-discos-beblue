@@ -3,10 +3,9 @@ package br.com.beblue.domain.disc;
 import br.com.beblue.domain.genre.Genre;
 import br.com.beblue.domain.sale.DiscSale;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import lombok.experimental.Accessors;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,8 +20,11 @@ import java.util.List;
 
 @Data
 @Builder
-@NoArgsConstructor
-@AllArgsConstructor
+@Accessors(fluent = true)
+@ToString(exclude = "disc")
+@EqualsAndHashCode(exclude = "disc", callSuper = false)
+@NoArgsConstructor(force = true)
+@AllArgsConstructor(onConstructor_ = @Builder)
 @Entity
 public class Disc {
 

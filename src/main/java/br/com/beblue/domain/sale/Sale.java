@@ -1,9 +1,7 @@
 package br.com.beblue.domain.sale;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import lombok.experimental.Accessors;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,11 +14,14 @@ import javax.persistence.CascadeType;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
 @Data
 @Builder
-@NoArgsConstructor
-@AllArgsConstructor
-@Entity
+@Accessors(fluent = true)
+@ToString(exclude = "sale")
+@EqualsAndHashCode(exclude = "sale", callSuper = false)
+@NoArgsConstructor(force = true)
+@AllArgsConstructor(onConstructor_ = @Builder)
 public class Sale {
 
     @Id

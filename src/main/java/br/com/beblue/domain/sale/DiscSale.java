@@ -3,10 +3,9 @@ package br.com.beblue.domain.sale;
 
 import br.com.beblue.domain.disc.Disc;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import lombok.experimental.Accessors;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,11 +15,14 @@ import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
+@Entity
 @Data
 @Builder
-@NoArgsConstructor
-@AllArgsConstructor
-@Entity
+@Accessors(fluent = true)
+@ToString(exclude = "sale")
+@EqualsAndHashCode(exclude = "sale", callSuper = false)
+@NoArgsConstructor(force = true)
+@AllArgsConstructor(onConstructor_ = @Builder)
 public class DiscSale {
 
     @Id
