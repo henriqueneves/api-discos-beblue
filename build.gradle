@@ -35,6 +35,7 @@ dependencies {
 	implementation 'org.springframework.cloud:spring-cloud-stream'
 	compileOnly 'org.projectlombok:lombok'
 	compile "org.zalando:problem-spring-web:$problemSpringWebVersion"
+	compile 'org.springframework.security:spring-security-data'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'com.h2database:h2'
 	annotationProcessor 'org.projectlombok:lombok'
