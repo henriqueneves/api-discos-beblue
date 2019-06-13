@@ -25,6 +25,7 @@ repositories {
 
 ext {
 	set('springCloudVersion', "Greenwich.SR1")
+	set('problemSpringWebVersion', "0.23.0")
 }
 
 dependencies {
@@ -33,6 +34,7 @@ dependencies {
 	implementation 'org.liquibase:liquibase-core'
 	implementation 'org.springframework.cloud:spring-cloud-stream'
 	compileOnly 'org.projectlombok:lombok'
+	compile "org.zalando:problem-spring-web:$problemSpringWebVersion"
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'com.h2database:h2'
 	annotationProcessor 'org.projectlombok:lombok'
