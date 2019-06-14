@@ -19,8 +19,18 @@ public class DiscRepositoryJpa implements DiscRepository {
     }
 
     @Override
-    public Disc save(Disc disc) {
-        return discRepositorySpringData.save(disc);
+    public void save(Disc disc) {
+        discRepositorySpringData.save(disc);
+    }
+
+    @Override
+    public void edit(Disc disc) {
+
+    }
+
+    @Override
+    public void delete(Disc disc) {
+        discRepositorySpringData.delete(disc);
     }
 
     @Override

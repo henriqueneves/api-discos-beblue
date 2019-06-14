@@ -7,7 +7,11 @@ import java.util.Optional;
 
 public interface DiscRepository {
 
-    Disc save(Disc disc);
+    void save(Disc disc);
+
+    void edit(Disc disc);
+
+    void delete(Disc disc);
 
     Optional<Disc> findById(Long id);
 

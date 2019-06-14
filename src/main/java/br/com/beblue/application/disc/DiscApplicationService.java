@@ -12,6 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
+import static br.com.beblue.application.disc.DiscFactory.*;
+
 @Service
 @Transactional
 public class DiscApplicationService implements DiscService {
@@ -23,25 +25,26 @@ public class DiscApplicationService implements DiscService {
     }
 
     @Override
-    @Transactional(readOnly = true)
-    public DiscDTO findById(Long id) {
-        Optional<Disc> disc = discRepository.findById(id);
-        return disc.map(DiscFactory::createDiscDTO).orElseThrow(DiscNotFoundException::new);
-    }
-
-    @Override
     public void create(DiscDTO discDTO) {
-
+        discRepository.save(createDisc(discDTO));
     }
 
     @Override
     public void edit(DiscDTO discDTO) {
-
+        discRepository.edit(createDisc(discDTO));
     }
 
     @Override
     public void delete(DiscDTO discDTO) {
+        discRepository.delete(createDisc(discDTO));
+    }
 
+
+    @Override
+    @Transactional(readOnly = true)
+    public DiscDTO findById(Long id) {
+        Optional<Disc> disc = discRepository.findById(id);
+        return disc.map(DiscFactory::createDiscDTO).orElseThrow(DiscNotFoundException::new);
     }
 
     @Override

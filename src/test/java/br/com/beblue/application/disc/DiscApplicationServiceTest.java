@@ -8,12 +8,9 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.math.BigDecimal;
-
-import static br.com.beblue.resources.TestsConstants.DISC_ID;
-import static org.junit.Assert.*;
+import static br.com.beblue.resources.disc.DiscFixture.disc;
+import static br.com.beblue.resources.disc.DiscFixture.discDTO;
 import static org.mockito.BDDMockito.then;
-import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class DiscApplicationServiceTest {
@@ -28,14 +25,32 @@ public class DiscApplicationServiceTest {
         discService = new DiscApplicationService(discRepository);
     }
 
+    /* Create */
 
     @Test
-    public void givenAnExistentIdWhenFindByDiscDTOThenDelegateToRepositoryAndReturn() {
-        //given
-        Long id = DISC_ID;
-        //when
-        discService.findById(id);
-        //then
-
+    public void givenADiscDTOWhenRequestToCreateDiscThenInvokeRepositoryCreate(){
+        DiscDTO discDTO = discDTO();
+        discService.create(discDTO);
+        then(discRepository).should().save(disc());
     }
+
+    /* Edit */
+
+    @Test
+    public void givenADiscDTOWhenRequestToEditDiscThenInvokeRepositoryEdit(){
+        DiscDTO discDTO = discDTO();
+        discService.edit(discDTO);
+        then(discRepository).should().edit(disc());
+    }
+
+    /* Delete */
+
+    @Test
+    public void givenADiscDTOWhenRequestToDeleteDiscThenInvokeRepositoryDelete(){
+        DiscDTO discDTO = discDTO();
+        discService.delete(discDTO);
+        then(discRepository).should().delete(disc());
+    }
+
+
 }

@@ -1,9 +1,7 @@
 package br.com.beblue.ports.adapters.repositories;
 
-import br.com.beblue.application.disc.dto.DiscDTO;
 import br.com.beblue.domain.disc.Disc;
 import br.com.beblue.domain.disc.DiscRepository;
-import br.com.beblue.resources.TestsFixture;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,9 +9,8 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.Optional;
-
-import static br.com.beblue.resources.TestsConstants.DISC_ID;
-import static br.com.beblue.resources.TestsFixture.*;
+import static br.com.beblue.resources.disc.DiscConstants.DISC_ID;
+import static br.com.beblue.resources.disc.DiscFixture.disc;
 import static java.util.Optional.of;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
@@ -33,22 +30,28 @@ public class DiscRepositoryJpaTest {
     }
 
     @Test
-    public void givenAValidDiscWhenSaveThenDelegateToRepository() {
-        //given
+    public void givenAValidDiscWhenSaveThenDelegateToJpaRepository() {
         Disc disc = disc();
-        //when
         discRepository.save(disc);
-        //then
         then(discRepositorySpringData).should().save(disc);
     }
 
     @Test
+    public void givenAValidDiscWhenEditThenDelegateToJpaRepository(){
+        Disc disc = disc();
+        discRepository.edit(disc);
+        then(discRepositorySpringData).should().save(disc);
+    }
+
+    @Test
+    public void givenADiscWhenDeleteThenDelegateToJpaRepository(){
+        Disc disc = disc();
+    }
+
+    @Test
     public void givenAnExistingDiscWhenFindByIdThenDelegateToRepositoryAndReturn() {
-        //given
         given(discRepositorySpringData.findById(DISC_ID)).willReturn(of(disc()));
-        //when
         Optional<Disc> disc = discRepository.findById(DISC_ID);
-        //then
         then(discRepositorySpringData).should().findById(DISC_ID);
         assertThat(disc).isNotEmpty();
     }
