@@ -138,6 +138,9 @@ public class DiscControllerTest {
                 .perform(get("/discs/{id}", DISC_ID).contentType(APPLICATION_JSON_UTF8))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$..id").exists());
+
+        then(discService).should().findById(DISC_ID);
+
     }
 
     @Test
