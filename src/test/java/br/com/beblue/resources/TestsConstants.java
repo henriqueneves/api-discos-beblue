@@ -1,14 +1,26 @@
 package br.com.beblue.resources;
 
 import br.com.beblue.domain.disc.Genre;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonPrimitive;
+import com.google.gson.JsonSerializer;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
-public class TestsConstants {
+import static java.time.format.DateTimeFormatter.ISO_LOCAL_DATE_TIME;
 
-    public static final Long DISC_ID = 1L;
-    public static final String DISC_NAME = "Disc name";
-    public static final Genre DISC_GENRE = Genre.ROCK;
-    public static final BigDecimal DISC_PRICE = new BigDecimal("22.50");
+public final class TestsConstants {
+
+    private TestsConstants() {
+    }
+
+    public static final Gson GSON = new GsonBuilder()
+            .registerTypeAdapter(LocalDateTime.class, (JsonSerializer<LocalDateTime>) (src, typeOfSrc, context) ->
+                    new JsonPrimitive(src.format(ISO_LOCAL_DATE_TIME)))
+            .setPrettyPrinting()
+            .create();
+
 
 }

@@ -15,13 +15,18 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import static br.com.beblue.resources.TestsConstants.DISC_ID;
-import static br.com.beblue.resources.TestsFixture.discDTO;
+import static br.com.beblue.resources.TestsConstants.GSON;
+import static br.com.beblue.resources.disc.DiscConstants.DISC_ID;
+import static br.com.beblue.resources.disc.DiscFixture.discDTO;
+import static br.com.beblue.resources.disc.DiscFixture.invalidDiscDTO;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.BDDMockito.then;
+import static org.mockito.Mockito.never;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
-import static org.springframework.http.HttpStatus.NOT_FOUND;
 import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -40,34 +45,61 @@ public class DiscControllerTest {
     @MockBean
     private DiscService discService;
 
-    private MockMvc restMockMvc;
+    private MockMvc mockMvc;
 
     @Before
     public void setUp(){
         final DiscController discController = new DiscController(discService);
-        this.restMockMvc = MockMvcBuilders.standaloneSetup(discController)
+        this.mockMvc = MockMvcBuilders.standaloneSetup(discController)
                 .setControllerAdvice(exceptionTranslator)
                 .setMessageConverters(jacksonMessageConverter)
                 .build();
     }
+
+    /* Create */
+
+    @Test
+    public void givenDiscWhenRequestToCreateDiscThenShouldReturnNoContent() throws Exception {
+        mockMvc.perform(post("/discs")
+                .contentType(APPLICATION_JSON_UTF8)
+                .content(GSON.toJson(discDTO())))
+                .andDo(print())
+                .andExpect(status().isNoContent());
+
+        then(discService).should().create(discDTO());
+    }
+
+    @Test
+    public void givenInvalidDiscWhenRequestToCreateDiscThenShouldReturnBadRequest() throws Exception {
+        mockMvc.perform(post("/discs")
+                .contentType(APPLICATION_JSON_UTF8)
+                .content(GSON.toJson(invalidDiscDTO())))
+                .andDo(print())
+                .andExpect(status().isNoContent());
+
+        then(discService).should(never()).create(invalidDiscDTO());
+    }
+
+
+    /* Find by id */
 
     @Test
     public void givenAnExistingDiscWhenFindByIdThenReturnDTO() throws Exception {
         given(discService.findById(DISC_ID))
                 .willReturn(discDTO());
 
-        restMockMvc
+        mockMvc
                 .perform(get("/discs/{id}", DISC_ID).contentType(APPLICATION_JSON_UTF8))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$..id").exists());
     }
 
     @Test
-    public void givenANonExistentDiscWhenFindByIdThenReturnsAProblemWithErros() throws Exception {
+    public void givenANonExistentDiscWhenFindByIdThenReturnsAProblemWithErrors() throws Exception {
         given(discService.findById(DISC_ID))
                 .willThrow(new DiscNotFoundException());
 
-        restMockMvc
+        mockMvc
                 .perform(get("/discs/{id}", DISC_ID).contentType(APPLICATION_JSON_UTF8))
                 .andExpect(status().isNotFound());
     }
