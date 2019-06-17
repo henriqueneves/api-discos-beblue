@@ -2,7 +2,6 @@ package br.com.beblue.application.disc;
 
 import br.com.beblue.application.disc.dto.DiscDTO;
 import br.com.beblue.domain.disc.DiscRepository;
-import br.com.beblue.resources.disc.DiscFixture;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

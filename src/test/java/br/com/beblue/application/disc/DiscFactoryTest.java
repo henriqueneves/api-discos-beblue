@@ -3,10 +3,13 @@ package br.com.beblue.application.disc;
 import br.com.beblue.application.disc.dto.DiscDTO;
 import br.com.beblue.domain.disc.Disc;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.junit.MockitoJUnitRunner;
 import static br.com.beblue.resources.disc.DiscFixture.disc;
 import static br.com.beblue.resources.disc.DiscFixture.discDTO;
 import static org.assertj.core.api.Assertions.*;
 
+@RunWith(MockitoJUnitRunner.class)
 public class DiscFactoryTest {
 
     @Test

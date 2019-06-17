@@ -20,7 +20,7 @@ import java.util.List;
 @Accessors(fluent = true)
 @ToString(exclude = "sale")
 @EqualsAndHashCode(exclude = "sale", callSuper = false)
-@NoArgsConstructor(force = true)
+@NoArgsConstructor
 @AllArgsConstructor(onConstructor_ = @Builder)
 public class Sale {
 
