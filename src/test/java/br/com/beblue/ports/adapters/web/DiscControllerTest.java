@@ -164,7 +164,7 @@ public class DiscControllerTest {
                 .perform(get("/discs/search/ROCK"))
                 .andExpect(status().isOk());
 
-        then(discService).should().findByGenreOrderByName(Genre.ROCK, defaultFilter());
+        then(discService).should().findByGenreOrderByName(Genre.ROCK, defaultFilter().toPageable());
 
     }
 
@@ -174,7 +174,7 @@ public class DiscControllerTest {
                 .perform(get("/discs/search/"))
                 .andExpect(status().isBadRequest());
 
-        then(discService).should(never()).findByGenreOrderByName(null, defaultFilter());
+        then(discService).should(never()).findByGenreOrderByName(null, defaultFilter().toPageable());
     }
 
 
