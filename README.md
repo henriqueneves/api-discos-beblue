@@ -59,7 +59,7 @@ Desafio para ingresso como desenvolvedor back-end no Beblue: API REST para um lo
 
 * Busca paginada: retorna N discos de determinado gênero utilizando filtros
   * Content-Type: application/json
-  * Parâmetros opcionais: page, size, ordenarPor, ordem
+  * Parâmetros opcionais: page, size (max = 1000)
   * GET: [http://localhost:8080/discs/search/**ROCK**?page=**1**&size=**10**](http://localhost:8080/discs/search/ROCK?page=1&size=10)
 
 ## Observações:
