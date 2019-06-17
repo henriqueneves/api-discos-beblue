@@ -5,7 +5,6 @@ import br.com.beblue.application.disc.dto.DiscDTO;
 import br.com.beblue.domain.disc.Genre;
 import br.com.beblue.shared.utils.DefaultFilter;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -37,9 +36,9 @@ public class DiscController {
         return noContent().build();
     }
 
-    @DeleteMapping
-    public ResponseEntity<Void> deleteDisc(@RequestBody @Valid DiscDTO discDTO){
-        discService.delete(discDTO);
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteDisc(@PathVariable Long id){
+        discService.delete(DiscDTO.builder().id(id).build());
         return noContent().build();
     }
 
@@ -52,7 +51,7 @@ public class DiscController {
 
     @GetMapping("/search/{genre}")
     public ResponseEntity<Page<DiscDTO>> searchDiscDTO(@PathVariable Genre genre, @PageableDefault DefaultFilter pageFilter) {
-        Page<DiscDTO> page = discService.findByGenreOrderByName(genre, pageFilter);
+        Page<DiscDTO> page = discService.findByGenreOrderByName(genre, pageFilter.toPageable());
         return ok(page);
 
     }

@@ -110,25 +110,25 @@ public class DiscControllerTest {
     /* Delete */
 
     @Test
-    public void givenDiscDTOWhenRequestToDeleteThenShouldReturnNoContent() throws Exception {
-        mockMvc.perform(delete("/discs")
+    public void givenIdWhenRequestToDeleteThenShouldReturnNoContent() throws Exception {
+        mockMvc.perform(delete("/discs/" + DISC_ID )
                 .contentType(APPLICATION_JSON_UTF8)
-                .content(GSON.toJson(discDTO())))
+                .content(""))
                 .andDo(print())
                 .andExpect(status().isNoContent());
 
-        then(discService).should().delete(discDTO());
+        then(discService).should().delete(discDTOWithIdOnly());
     }
 
     @Test
-    public void givenEmptyDiscDTOWhenRequestToDeleteThenShouldReturnBadRequest() throws Exception {
-        mockMvc.perform(delete("/discs")
+    public void givenInvalidIdWhenRequestToDeleteThenShouldReturnBadRequest() throws Exception {
+        mockMvc.perform(delete("/discs/null")
                 .contentType(APPLICATION_JSON_UTF8)
-                .content(GSON.toJson(emptyDiscDTO())))
+                .content(""))
                 .andDo(print())
                 .andExpect(status().isBadRequest());
 
-        then(discService).should(never()).delete(emptyDiscDTO());
+        then(discService).should(never()).delete(any());
     }
 
 

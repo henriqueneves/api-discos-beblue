@@ -48,6 +48,12 @@ public interface DiscFixture {
                 .build();
     }
 
+    static DiscDTO discDTOWithIdOnly(){
+        return DiscDTO.builder()
+                .id(DISC_ID)
+                .build();
+    }
+
     static Page<Disc> pageDisc(){
          return new PageImpl<>(newArrayList(disc()));
     }
