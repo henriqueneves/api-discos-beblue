@@ -7,7 +7,10 @@ Desafio para ingresso como desenvolvedor back-end no Beblue: API REST para um lo
 - [Spring Boot](https://spring.io/projects/spring-boot)
 - [Spring Data JPA](https://spring.io/projects/spring-data-jpa)
 - [H2 Database Engine](https://www.h2database.com/) (banco de dados)
-- [Spotify Web APL Librarie Java](https://github.com/thelinmichael/spotify-web-api-java)
+- [Lombok](https://projectlombok.org/)
+- [JUnit](https://junit.org/junit5/)
+- [AssertJ](https://joel-costigliola.github.io/assertj/)
+- [Mockito](https://site.mockito.org/)
 
 ## Instruções de execução
 
