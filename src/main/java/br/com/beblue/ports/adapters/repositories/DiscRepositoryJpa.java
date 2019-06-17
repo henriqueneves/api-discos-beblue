@@ -25,7 +25,7 @@ public class DiscRepositoryJpa implements DiscRepository {
 
     @Override
     public void edit(Disc disc) {
-
+        discRepositorySpringData.save(disc);
     }
 
     @Override
@@ -35,11 +35,12 @@ public class DiscRepositoryJpa implements DiscRepository {
 
     @Override
     public Optional<Disc> findById(Long id) {
+
         return discRepositorySpringData.findById(id);
     }
 
     @Override
     public Page<Disc> findByGenre(Genre genre, Pageable pageable) {
-        return null;
+        return discRepositorySpringData.findByGenreOrderByName(genre, pageable);
     }
 }

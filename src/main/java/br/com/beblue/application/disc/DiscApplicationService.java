@@ -49,6 +49,6 @@ public class DiscApplicationService implements DiscService {
 
     @Override
     public Page<DiscDTO> findByGenreOrderByName(Genre genre, Pageable pageable) {
-        return null;
+        return discRepository.findByGenre(genre, pageable).map(DiscFactory::createDiscDTO);
     }
 }

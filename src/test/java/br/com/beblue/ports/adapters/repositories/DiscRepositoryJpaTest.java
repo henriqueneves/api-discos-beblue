@@ -7,10 +7,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.data.domain.Page;
 
 import java.util.Optional;
+
+import static br.com.beblue.resources.disc.DiscConstants.DISC_GENRE;
 import static br.com.beblue.resources.disc.DiscConstants.DISC_ID;
-import static br.com.beblue.resources.disc.DiscFixture.disc;
+import static br.com.beblue.resources.disc.DiscFixture.*;
 import static java.util.Optional.of;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
@@ -29,6 +32,8 @@ public class DiscRepositoryJpaTest {
         discRepository = new DiscRepositoryJpa(discRepositorySpringData);
     }
 
+
+    /* save */
     @Test
     public void givenAValidDiscWhenSaveThenDelegateToJpaRepository() {
         Disc disc = disc();
@@ -36,6 +41,7 @@ public class DiscRepositoryJpaTest {
         then(discRepositorySpringData).should().save(disc);
     }
 
+    /* edit */
     @Test
     public void givenAValidDiscWhenEditThenDelegateToJpaRepository(){
         Disc disc = disc();
@@ -43,16 +49,30 @@ public class DiscRepositoryJpaTest {
         then(discRepositorySpringData).should().save(disc);
     }
 
+    /* delete */
     @Test
     public void givenADiscWhenDeleteThenDelegateToJpaRepository(){
         Disc disc = disc();
+        discRepository.delete(disc);
+        then(discRepositorySpringData).should().delete(disc);
     }
 
+    /* findById*/
     @Test
     public void givenAnExistingDiscWhenFindByIdThenDelegateToRepositoryAndReturn() {
         given(discRepositorySpringData.findById(DISC_ID)).willReturn(of(disc()));
         Optional<Disc> disc = discRepository.findById(DISC_ID);
         then(discRepositorySpringData).should().findById(DISC_ID);
         assertThat(disc).isNotEmpty();
+    }
+
+    /* findByGenre */
+    @Test
+    public void givenAnExistingGenreWhenFindByGenreThenDelegateToRepositoryAndReturn() {
+        given(discRepositorySpringData.findByGenreOrderByName(DISC_GENRE, defaultFilter()))
+                .willReturn(pageDisc());
+        Page<Disc> page = discRepository.findByGenre(DISC_GENRE, defaultFilter());
+        then(discRepositorySpringData).should().findByGenreOrderByName(DISC_GENRE, defaultFilter());
+        assertThat(page).isNotEmpty();
     }
 }

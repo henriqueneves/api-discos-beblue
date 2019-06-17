@@ -1,8 +1,10 @@
 package br.com.beblue.ports.adapters.web;
 
 import br.com.beblue.application.disc.DiscApplicationService;
+import br.com.beblue.domain.disc.Genre;
 import br.com.beblue.ports.adapters.web.error.ExceptionTranslator;
 import br.com.beblue.shared.exceptions.DiscNotFoundException;
+import br.com.beblue.shared.utils.DefaultFilter;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,8 +16,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import static br.com.beblue.resources.TestsConstants.GSON;
+import static br.com.beblue.resources.disc.DiscConstants.DISC_GENRE;
 import static br.com.beblue.resources.disc.DiscConstants.DISC_ID;
 import static br.com.beblue.resources.disc.DiscFixture.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyObject;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.then;
 import static org.mockito.Mockito.never;
@@ -151,6 +156,28 @@ public class DiscControllerTest {
         mockMvc
                 .perform(get("/discs/{id}", DISC_ID).contentType(APPLICATION_JSON_UTF8))
                 .andExpect(status().isNotFound());
+    }
+
+    /* Search */
+
+    @Test
+    public void givenAnExistingGenreWhenSearchPageableByGenreThenReturnDTO() throws Exception {
+
+        mockMvc
+                .perform(get("/discs/search/ROCK"))
+                .andExpect(status().isOk());
+
+        then(discService).should().findByGenreOrderByName(Genre.ROCK, defaultFilter());
+
+    }
+
+    @Test
+    public void givenANullGenreWhenFindByIdThenReturnsAProblemWithErrors() throws Exception {
+        mockMvc
+                .perform(get("/discs/search/"))
+                .andExpect(status().isBadRequest());
+
+        then(discService).should(never()).findByGenreOrderByName(null, defaultFilter());
     }
 
 

@@ -12,7 +12,7 @@ public interface DiscRepositorySpringData extends JpaRepository <Disc, Long> {
 
     Optional<Disc> findById(Long id);
 
-    Page<Disc> findByGenre(Genre genre, Pageable pageable);
+    Page<Disc> findByGenreOrderByName(Genre genre, Pageable pageable);
 
 
 }

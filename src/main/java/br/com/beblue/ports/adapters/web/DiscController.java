@@ -2,6 +2,9 @@ package br.com.beblue.ports.adapters.web;
 
 import br.com.beblue.application.disc.DiscApplicationService;
 import br.com.beblue.application.disc.dto.DiscDTO;
+import br.com.beblue.domain.disc.Genre;
+import br.com.beblue.shared.utils.DefaultFilter;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
@@ -47,10 +50,10 @@ public class DiscController {
         return ok(discDTO);
     }
 
-    @GetMapping("/search")
-    public ResponseEntity<DiscDTO> searchDiscDTO(@PageableDefault Pageable pageable) {
-
-        return ok(null);
+    @GetMapping("/search/{genre}")
+    public ResponseEntity<Page<DiscDTO>> searchDiscDTO(@PathVariable Genre genre, @PageableDefault DefaultFilter pageFilter) {
+        Page<DiscDTO> page = discService.findByGenreOrderByName(genre, pageFilter);
+        return ok(page);
 
     }
 

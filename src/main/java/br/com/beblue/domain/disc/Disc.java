@@ -20,6 +20,7 @@ import java.util.List;
 @ToString(exclude = "disc")
 @EqualsAndHashCode(exclude = "disc", callSuper = false)
 @AllArgsConstructor(onConstructor_ = @Builder)
+@NoArgsConstructor
 @Entity
 public class Disc {
 
