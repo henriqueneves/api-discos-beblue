@@ -14,7 +14,6 @@ import static org.springframework.http.ResponseEntity.ok;
 @RequestMapping("/sales")
 public class SaleController {
 
-
     private final SaleApplicationService saleService;
 
     public SaleController(SaleApplicationService saleApplicationService) {

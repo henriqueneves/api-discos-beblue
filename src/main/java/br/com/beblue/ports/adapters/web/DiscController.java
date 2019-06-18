@@ -38,7 +38,7 @@ public class DiscController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteDisc(@PathVariable Long id){
-        discService.delete(DiscDTO.builder().id(id).build());
+        discService.delete(id);
         return noContent().build();
     }
 

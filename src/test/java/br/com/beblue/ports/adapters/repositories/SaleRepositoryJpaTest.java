@@ -31,7 +31,6 @@ public class SaleRepositoryJpaTest {
         saleRepository = new SaleRepositoryJpa(saleRepositorySpringData);
     }
 
-    /* save */
     @Test
     public void givenAValidSaleWhenSaveThenDelegateToJpaRepository() {
         Sale sale = sale();
@@ -39,7 +38,6 @@ public class SaleRepositoryJpaTest {
         then(saleRepositorySpringData).should().save(sale);
     }
 
-    /* edit */
     @Test
     public void givenAValidSaleWhenEditThenDelegateToJpaRepository() {
         Sale sale = sale();
@@ -47,7 +45,6 @@ public class SaleRepositoryJpaTest {
         then(saleRepositorySpringData).should().save(sale);
     }
 
-    /* delete */
     @Test
     public void givenAValidSaleWhenDeleteThenDelegateToJpaRepository() {
         Sale sale = sale();
@@ -55,7 +52,6 @@ public class SaleRepositoryJpaTest {
         then(saleRepositorySpringData).should().delete(sale);
     }
 
-    /* findById*/
     @Test
     public void givenAnExistingDiscWhenFindByIdThenDelegateToRepositoryAndReturn() {
         given(saleRepositorySpringData.findById(SALE_ID)).willReturn(of(sale()));

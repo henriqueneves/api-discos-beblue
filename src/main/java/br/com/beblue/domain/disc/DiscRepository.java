@@ -11,7 +11,7 @@ public interface DiscRepository {
 
     void edit(Disc disc);
 
-    void delete(Disc disc);
+    void delete(Long disc);
 
     Optional<Disc> findById(Long id);
 

@@ -12,7 +12,7 @@ import java.util.Optional;
 @Repository
 public class DiscRepositoryJpa implements DiscRepository {
 
-    DiscRepositorySpringData discRepositorySpringData;
+    private final DiscRepositorySpringData discRepositorySpringData;
 
     public DiscRepositoryJpa(DiscRepositorySpringData discRepositorySpringData) {
         this.discRepositorySpringData = discRepositorySpringData;
@@ -29,8 +29,8 @@ public class DiscRepositoryJpa implements DiscRepository {
     }
 
     @Override
-    public void delete(Disc disc) {
-        discRepositorySpringData.delete(disc);
+    public void delete(Long id) {
+        discRepositorySpringData.deleteById(id);
     }
 
     @Override

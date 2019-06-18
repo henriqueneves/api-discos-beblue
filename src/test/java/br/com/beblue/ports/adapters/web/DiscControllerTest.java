@@ -55,8 +55,6 @@ public class DiscControllerTest {
                 .build();
     }
 
-    /* Create */
-
     @Test
     public void givenDiscWhenRequestToCreateThenShouldReturnNoContent() throws Exception {
         mockMvc.perform(post("/discs")
@@ -78,8 +76,6 @@ public class DiscControllerTest {
 
         then(discService).should(never()).create(invalidDiscDTO());
     }
-
-    /* Edit */
 
     @Test
     public void givenDiscWhenRequestToEditThenShouldReturnNoContent() throws Exception {
@@ -104,8 +100,6 @@ public class DiscControllerTest {
 
     }
 
-    /* Delete */
-
     @Test
     public void givenIdWhenRequestToDeleteThenShouldReturnNoContent() throws Exception {
         mockMvc.perform(delete("/discs/" + DISC_ID )
@@ -114,7 +108,7 @@ public class DiscControllerTest {
                 .andDo(print())
                 .andExpect(status().isNoContent());
 
-        then(discService).should().delete(discDTOWithIdOnly());
+        then(discService).should().delete(DISC_ID);
     }
 
     @Test
@@ -127,9 +121,6 @@ public class DiscControllerTest {
 
         then(discService).should(never()).delete(any());
     }
-
-
-    /* Find by id */
 
     @Test
     public void givenAnExistingDiscWhenFindByIdThenReturnDTO() throws Exception {
@@ -154,8 +145,6 @@ public class DiscControllerTest {
                 .perform(get("/discs/{id}", DISC_ID).contentType(APPLICATION_JSON_UTF8))
                 .andExpect(status().isNotFound());
     }
-
-    /* Search */
 
     @Test
     public void givenAnExistingGenreWhenSearchPageableByGenreThenReturnDTO() throws Exception {

@@ -55,8 +55,6 @@ public class SaleControllerTest {
                 .build();
     }
 
-    /* Create */
-
     @Test
     public void givenSaleWhenRequestToCreateThenShouldReturnNoContent() throws Exception {
         mockMvc.perform(post("/sales")
@@ -78,8 +76,6 @@ public class SaleControllerTest {
 
         then(saleService).should(never()).create(invalidSaleDTO());
     }
-
-    /* Edit */
 
     @Test
     public void givenDiscWhenRequestToEditThenShouldReturnNoContent() throws Exception {
@@ -104,8 +100,6 @@ public class SaleControllerTest {
 
     }
 
-    /* Delete */
-
     @Test
     public void givenIdWhenRequestToDeleteSaleThenShouldReturnNoContent() throws Exception {
         mockMvc.perform(delete("/sales/" + SALE_ID)
@@ -127,8 +121,6 @@ public class SaleControllerTest {
 
         then(saleService).should(never()).delete(any());
     }
-
-    /* Find by id */
 
     @Test
     public void givenAnExistingSaleWhenFindByIdThenReturnDTO() throws Exception {

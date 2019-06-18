@@ -11,7 +11,7 @@ public interface DiscService {
 
     void edit(DiscDTO discDTO);
 
-    void delete(DiscDTO discDTO);
+    void delete(Long id);
 
     DiscDTO findById(Long id);
 

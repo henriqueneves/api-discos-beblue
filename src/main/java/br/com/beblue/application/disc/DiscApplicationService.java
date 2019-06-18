@@ -18,7 +18,7 @@ import static br.com.beblue.application.disc.DiscFactory.*;
 @Transactional
 public class DiscApplicationService implements DiscService {
 
-    private DiscRepository discRepository;
+    private final DiscRepository discRepository;
 
     public DiscApplicationService(DiscRepository discRepository) {
         this.discRepository = discRepository;
@@ -35,8 +35,8 @@ public class DiscApplicationService implements DiscService {
     }
 
     @Override
-    public void delete(DiscDTO discDTO) {
-        discRepository.delete(createDisc(discDTO));
+    public void delete(Long id) {
+        discRepository.delete(id);
     }
 
 

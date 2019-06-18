@@ -15,7 +15,7 @@ import static br.com.beblue.application.sale.SaleFactory.createSale;
 @Transactional
 public class SaleApplicationService implements SaleService {
 
-    private SaleRepository saleRepository;
+    private final SaleRepository saleRepository;
 
     public SaleApplicationService(SaleRepository saleRepository) {
         this.saleRepository = saleRepository;

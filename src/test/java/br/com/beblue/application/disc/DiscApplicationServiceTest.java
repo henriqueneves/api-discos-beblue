@@ -27,16 +27,12 @@ public class DiscApplicationServiceTest {
         discService = new DiscApplicationService(discRepository);
     }
 
-    /* Create */
-
     @Test
     public void givenADiscDTOWhenRequestToCreateDiscThenInvokeRepositoryCreate(){
         DiscDTO discDTO = discDTO();
         discService.create(discDTO);
         then(discRepository).should().save(disc());
     }
-
-    /* Edit */
 
     @Test
     public void givenADiscDTOWhenRequestToEditDiscThenInvokeRepositoryEdit(){
@@ -45,16 +41,12 @@ public class DiscApplicationServiceTest {
         then(discRepository).should().edit(disc());
     }
 
-    /* Delete */
-
     @Test
     public void givenADiscDTOWhenRequestToDeleteDiscThenInvokeRepositoryDelete(){
-        DiscDTO discDTO = discDTO();
-        discService.delete(discDTO);
-        then(discRepository).should().delete(disc());
+        discService.delete(DISC_ID);
+        then(discRepository).should().delete(DISC_ID);
     }
 
-    /* findById */
     @Test
     public void givenAIdWhenRequestToFindByIdThenInvokeRepository(){
         given(discRepository.findById(DISC_ID))
@@ -63,7 +55,6 @@ public class DiscApplicationServiceTest {
         then(discRepository).should().findById(DISC_ID);
     }
 
-    /* searchByGenre */
     @Test
     public void givenAGenreAndPageableWhenRequestToSearchThenInvokeRepository(){
         given(discRepository.findByGenre(DISC_GENRE, defaultFilter()))

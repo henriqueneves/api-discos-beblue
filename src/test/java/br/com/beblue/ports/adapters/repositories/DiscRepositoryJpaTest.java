@@ -32,8 +32,6 @@ public class DiscRepositoryJpaTest {
         discRepository = new DiscRepositoryJpa(discRepositorySpringData);
     }
 
-
-    /* save */
     @Test
     public void givenAValidDiscWhenSaveThenDelegateToJpaRepository() {
         Disc disc = disc();
@@ -41,7 +39,6 @@ public class DiscRepositoryJpaTest {
         then(discRepositorySpringData).should().save(disc);
     }
 
-    /* edit */
     @Test
     public void givenAValidDiscWhenEditThenDelegateToJpaRepository(){
         Disc disc = disc();
@@ -49,15 +46,12 @@ public class DiscRepositoryJpaTest {
         then(discRepositorySpringData).should().save(disc);
     }
 
-    /* delete */
     @Test
     public void givenADiscWhenDeleteThenDelegateToJpaRepository(){
-        Disc disc = disc();
-        discRepository.delete(disc);
-        then(discRepositorySpringData).should().delete(disc);
+        discRepository.delete(DISC_ID);
+        then(discRepositorySpringData).should().deleteById(DISC_ID);
     }
 
-    /* findById*/
     @Test
     public void givenAnExistingDiscWhenFindByIdThenDelegateToRepositoryAndReturn() {
         given(discRepositorySpringData.findById(DISC_ID)).willReturn(of(disc()));
@@ -66,7 +60,6 @@ public class DiscRepositoryJpaTest {
         assertThat(disc).isNotEmpty();
     }
 
-    /* findByGenre */
     @Test
     public void givenAnExistingGenreWhenFindByGenreThenDelegateToRepositoryAndReturn() {
         given(discRepositorySpringData.findByGenreOrderByName(DISC_GENRE, defaultFilter()))

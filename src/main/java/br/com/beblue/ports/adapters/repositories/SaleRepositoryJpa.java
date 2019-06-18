@@ -11,7 +11,7 @@ import java.util.Optional;
 @Repository
 public class SaleRepositoryJpa  implements SaleRepository {
 
-    SaleRepositorySpringData saleRepositorySpringData;
+    private final SaleRepositorySpringData saleRepositorySpringData;
 
     public SaleRepositoryJpa(SaleRepositorySpringData saleRepositorySpringData){
         this.saleRepositorySpringData = saleRepositorySpringData;
