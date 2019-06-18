@@ -1,0 +1,78 @@
+databaseChangeLog:
+
+  - changeSet:
+      id: 201906181600
+      author: henrique
+      changes:
+        - createTable:
+            tableName: disc
+            columns:
+              - column:
+                  name: id
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                  type: BIGINT
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+              - column:
+                  name: genre
+                  type: int
+              - column:
+                  name: price
+                  type: NUMERIC(19, 4)
+        - createTable:
+            tableName: sale
+            columns:
+              - column:
+                  name: id
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                  type: BIGINT
+              - column:
+                  name: value_total
+                  type: NUMERIC(19, 4)
+              - column:
+                  name: cashback_total
+                  type: NUMERIC(19, 4)
+              - column:
+                  name: register
+                  type: datetime
+        - createTable:
+            tableName: disc_sale
+            columns:
+              - column:
+                  name: id
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                  type: BIGINT
+              - column:
+                  name: sale_id
+                  type: BIGINT
+              - column:
+                  name: disc_id
+                  type: BIGINT
+              - column:
+                  name: sale_value
+                  type: NUMERIC(19, 4)
+              - column:
+                  name: cashback_value
+                  type: NUMERIC(19, 4)
+        - addForeignKeyConstraint:
+            baseColumnNames: sale_id
+            baseTableName: disc_sale
+            constraintName: fk_sale_disc_sale_id
+            referencedColumnNames: id
+            referencedTableName: sale
+        - addForeignKeyConstraint:
+            baseColumnNames: disc_id
+            baseTableName: disc_sale
+            constraintName: fk_disc_disc_sale_id
+            referencedColumnNames: id
+            referencedTableName: disc
