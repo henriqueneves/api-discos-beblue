@@ -3,7 +3,7 @@
 Desafio para ingresso como desenvolvedor back-end no Beblue: API REST para um loja de discos de vinil que resolveu oferecer cashback em suas vendas.
 
 ### Tecnologias
-- [Maven](https://maven.apache.org/)
+- [Gradle](https://gradle.org/)
 - [Spring Boot](https://spring.io/projects/spring-boot)
 - [Spring Data JPA](https://spring.io/projects/spring-data-jpa)
 - [H2 Database Engine](https://www.h2database.com/) (banco de dados)
