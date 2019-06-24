@@ -12,3 +12,15 @@ spring:
   jpa:
     hibernate:
       ddl-auto: validate
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+  cloud:
+    stream:
+      bindings:
+        input:
+          destination: queue-cashback-calculated
+        output:
+          destination: queue-cashback-to-calculate
