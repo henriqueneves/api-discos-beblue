@@ -1,5 +1,6 @@
 package br.com.beblue.resources.sale;
 
+import br.com.beblue.application.sale.dto.CreateSaleDTO;
 import br.com.beblue.application.sale.dto.DiscSaleDTO;
 import br.com.beblue.application.sale.dto.SaleDTO;
 import br.com.beblue.domain.sale.DiscSale;
@@ -38,8 +39,18 @@ public interface SaleFixture {
                 .build();
     }
 
+    static CreateSaleDTO createSaleDTO(){
+        return CreateSaleDTO.builder()
+                .discsID(CREATE_DISC_SALE_ID)
+                .build();
+    }
+
     static SaleDTO invalidSaleDTO(){
         return saleDTO().discSalesDTO(null);
+    }
+
+    static CreateSaleDTO invalidCreateSaleDTO(){
+        return createSaleDTO().discsID(null);
     }
 
     static SaleDTO emptyDiscSaleDTO(){

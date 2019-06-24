@@ -17,7 +17,6 @@ public class SaleRepositoryJpa  implements SaleRepository {
         this.saleRepositorySpringData = saleRepositorySpringData;
     }
 
-
     @Override
     public void save(Sale sale) {
         saleRepositorySpringData.save(sale);

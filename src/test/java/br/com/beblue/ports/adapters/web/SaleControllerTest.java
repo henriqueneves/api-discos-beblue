@@ -59,22 +59,22 @@ public class SaleControllerTest {
     public void givenSaleWhenRequestToCreateThenShouldReturnNoContent() throws Exception {
         mockMvc.perform(post("/sales")
                 .contentType(APPLICATION_JSON_UTF8)
-                .content(GSON.toJson(saleDTO())))
+                .content(GSON.toJson(createSaleDTO())))
                 .andDo(print())
                 .andExpect(status().isNoContent());
 
-        then(saleService).should().create(saleDTO());
+        then(saleService).should().create(createSaleDTO());
     }
 
     @Test
     public void givenInvalidSaleWhenRequestToCreateThenShouldReturnBadRequest() throws Exception {
         mockMvc.perform(post("/sales")
                 .contentType(APPLICATION_JSON_UTF8)
-                .content(GSON.toJson(invalidSaleDTO())))
+                .content(GSON.toJson(invalidCreateSaleDTO())))
                 .andDo(print())
                 .andExpect(status().isBadRequest());
 
-        then(saleService).should(never()).create(invalidSaleDTO());
+        then(saleService).should(never()).create(invalidCreateSaleDTO());
     }
 
     @Test

@@ -1,18 +1,21 @@
 package br.com.beblue.ports.adapters.messaging;
 
+import br.com.beblue.application.sale.dto.SaleDTO;
 import br.com.beblue.domain.events.RestSource;
-import br.com.beblue.domain.sale.Sale;
-import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.MessageBuilder;
 
-@Component
+@Service
 public class CashbackProducer {
 
-    public boolean sendMessageSale(Sale sale, RestSource restSource){
-        Message<Sale> message = MessageBuilder.withPayload(sale).build();
-        boolean success = restSource.sendMessage().send(message);
-        return success;
+    @Autowired
+    private RestSource restSource;
+
+    public boolean sendMessageSale(SaleDTO saleDTO){
+        Message<SaleDTO> message = MessageBuilder.withPayload(saleDTO).build();
+        return restSource.sendMessage().send(message);
     }
 
 }

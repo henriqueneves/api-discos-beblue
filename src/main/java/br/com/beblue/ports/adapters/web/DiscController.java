@@ -3,11 +3,7 @@ package br.com.beblue.ports.adapters.web;
 import br.com.beblue.application.disc.DiscApplicationService;
 import br.com.beblue.application.disc.dto.DiscDTO;
 import br.com.beblue.domain.disc.Genre;
-import br.com.beblue.domain.events.RestSource;
-import br.com.beblue.domain.sale.Sale;
-import br.com.beblue.ports.adapters.messaging.CashbackProducer;
 import br.com.beblue.shared.utils.DefaultFilter;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
@@ -21,12 +17,6 @@ import static org.springframework.http.ResponseEntity.ok;
 @RestController
 @RequestMapping("/discs")
 public class DiscController {
-
-    @Autowired
-    private RestSource restSource;
-
-    @Autowired
-    private CashbackProducer cashbackProducer;
 
     private final DiscApplicationService discService;
 
@@ -56,10 +46,6 @@ public class DiscController {
     @GetMapping("/{id}")
     public ResponseEntity<DiscDTO> getDiscDTO(@PathVariable Long id) {
         DiscDTO discDTO = discService.findById(id);
-
-        Sale sale = Sale.builder().build();
-        boolean result = cashbackProducer.sendMessageSale(sale, restSource);
-
         return ok(discDTO);
     }
 

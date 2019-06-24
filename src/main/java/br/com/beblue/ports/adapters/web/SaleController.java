@@ -1,6 +1,7 @@
 package br.com.beblue.ports.adapters.web;
 
 import br.com.beblue.application.sale.SaleApplicationService;
+import br.com.beblue.application.sale.dto.CreateSaleDTO;
 import br.com.beblue.application.sale.dto.SaleDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,8 +22,8 @@ public class SaleController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> createSale(@RequestBody @Valid SaleDTO saleDTO) {
-        saleService.create(saleDTO);
+    public ResponseEntity<Void> createSale(@RequestBody @Valid CreateSaleDTO createSaleDTO) {
+        saleService.create(createSaleDTO);
         return noContent().build();
     }
 

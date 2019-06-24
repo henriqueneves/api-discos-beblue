@@ -1,13 +1,17 @@
 package br.com.beblue.application.sale;
 
 import br.com.beblue.application.disc.DiscFactory;
+import br.com.beblue.application.sale.dto.CreateSaleDTO;
 import br.com.beblue.application.sale.dto.DiscSaleDTO;
 import br.com.beblue.application.sale.dto.SaleDTO;
 import br.com.beblue.domain.sale.DiscSale;
 import br.com.beblue.domain.sale.Sale;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
 
@@ -35,8 +39,23 @@ public class SaleFactory {
                 .build();
     }
 
+    public static Sale createSale(CreateSaleDTO createSaleDTO){
+        return Sale
+                .builder()
+                .discSales(createListDiscSale(createSaleDTO.discsID()))
+                .build();
+    }
+
+
+
+
     public static List<DiscSale> createListDiscSale(List<DiscSaleDTO> discSaleDTO){
         return discSaleDTO == null ? new ArrayList() : discSaleDTO.stream().map(SaleFactory::createDiscSale).collect(toList());
+    }
+
+    public static List<DiscSale> createListDiscSale(Long[]  discsId){
+        List<Long> listDiscsId = Arrays.asList(discsId);
+        return discsId.length == 0 ? new ArrayList() : listDiscsId.stream().map(SaleFactory::createDiscSale).collect(toList());
     }
 
     public static List<DiscSaleDTO> createListDiscSaleDTO(List<DiscSale> discSale){
@@ -51,7 +70,13 @@ public class SaleFactory {
                 .saleValue(discSaleDTO.saleValue())
                 .cashbackValue(discSaleDTO.cashbackValue())
                 .build();
+    }
 
+    public static DiscSale createDiscSale(Long discSaleId){
+        return DiscSale
+                .builder()
+                .id(discSaleId)
+                .build();
     }
 
     public static DiscSaleDTO createDiscSaleDTO(DiscSale discSale){

@@ -18,4 +18,6 @@ public class SaleConstants {
     public static final BigDecimal DISC_SALE_SALE_VALUE = new BigDecimal("22.50");
     public static final BigDecimal DISC_SALE_CASHBACK_VALUE = new BigDecimal("2.50");
 
+    public static final Long[] CREATE_DISC_SALE_ID = {SALE_ID};
+
 }

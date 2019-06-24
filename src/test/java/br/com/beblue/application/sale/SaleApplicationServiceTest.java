@@ -1,7 +1,9 @@
 package br.com.beblue.application.sale;
 
+import br.com.beblue.application.sale.dto.CreateSaleDTO;
 import br.com.beblue.application.sale.dto.SaleDTO;
 import br.com.beblue.domain.sale.SaleRepository;
+import br.com.beblue.ports.adapters.messaging.CashbackProducer;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,17 +22,20 @@ public class SaleApplicationServiceTest {
     @Mock
     private SaleRepository saleRepository;
 
+    @Mock
+    private CashbackProducer cashbackProducer;
+
     @Before
     public void setUp() {
-        saleService = new SaleApplicationService(saleRepository);
+        saleService = new SaleApplicationService(saleRepository, cashbackProducer);
     }
 
     /* Create */
 
     @Test
     public void givenASaleDTOWhenRequestToCreateDiscThenInvokeRepositoryCreate(){
-        SaleDTO saleDTO = saleDTO();
-        saleService.create(saleDTO);
+        CreateSaleDTO createSaleDTO = createSaleDTO();
+        saleService.create(createSaleDTO);
         then(saleRepository).should().save(sale());
     }
 
