@@ -20,4 +20,5 @@ public class SaleConstants {
 
     public static final Long[] CREATE_DISC_SALE_ID = {SALE_ID};
 
+
 }

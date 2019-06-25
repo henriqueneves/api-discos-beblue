@@ -1,0 +1,24 @@
+package br.com.beblue.application.sale.dto;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.integration.annotation.Default;
+
+import java.util.Date;
+
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor(onConstructor_ = @Builder)
+public class SearchSaleQueryDTO {
+
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
+    private Date start = new Date(Long.MIN_VALUE);
+
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
+    private Date end = new Date(Long.MAX_VALUE);
+}

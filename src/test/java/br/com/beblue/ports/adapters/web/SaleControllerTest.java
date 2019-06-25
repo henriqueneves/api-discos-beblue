@@ -14,6 +14,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import static br.com.beblue.resources.TestsConstants.GSON;
+import static br.com.beblue.resources.disc.DiscFixture.defaultFilter;
 import static br.com.beblue.resources.sale.SaleConstants.SALE_ID;
 import static br.com.beblue.resources.sale.SaleFixture.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -119,6 +120,17 @@ public class SaleControllerTest {
         mockMvc
                 .perform(get("/sales/{id}", SALE_ID).contentType(APPLICATION_JSON_UTF8))
                 .andExpect(status().isNotFound());
+    }
+
+    @Test
+    public void givenDatesWhenSearchPageableThenReturnDTO() throws Exception {
+
+        mockMvc
+                .perform(get("/sales/search/"))
+                .andExpect(status().isOk());
+
+        then(saleService).should().searchByDate(null, null, defaultFilter().toPageable());
+
     }
 
 }

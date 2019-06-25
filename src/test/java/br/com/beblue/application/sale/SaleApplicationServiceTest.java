@@ -9,6 +9,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+
+import static br.com.beblue.resources.disc.DiscFixture.defaultFilter;
 import static br.com.beblue.resources.sale.SaleConstants.SALE_ID;
 import static br.com.beblue.resources.sale.SaleFixture.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -31,8 +33,6 @@ public class SaleApplicationServiceTest {
         saleService = new SaleApplicationService(saleRepository, cashbackProducer);
     }
 
-    /* Create */
-
     @Test
     public void givenASaleDTOWhenRequestToCreateDiscThenInvokeRepositoryCreate(){
         CreateSaleDTO createSaleDTO = createSaleDTO();
@@ -42,16 +42,12 @@ public class SaleApplicationServiceTest {
         then(saleRepository).should().save(any());
     }
 
-    /* Edit */
-
     @Test
     public void givenASaleDTOWhenRequestToEditSaleThenInvokeRepositoryEdit(){
         SaleDTO saleDTO = saleDTO();
         saleService.edit(saleDTO);
         then(saleRepository).should().edit(sale());
     }
-
-    /* Delete */
 
     @Test
     public void givenASaleDTOWhenRequestToDeleteSaleThenInvokeRepositoryDelete(){
@@ -60,13 +56,20 @@ public class SaleApplicationServiceTest {
         then(saleRepository).should().delete(sale());
     }
 
-    /* findById */
     @Test
     public void givenAIdWhenRequestToFindByIdThenInvokeRepository(){
         given(saleRepository.findById(SALE_ID))
                 .willReturn(optionalSale());
         saleService.findById(SALE_ID);
         then(saleRepository).should().findById(SALE_ID);
+    }
+
+    @Test
+    public void givenAGenreAndPageableWhenRequestToSearchThenInvokeRepository(){
+        given(saleRepository.searchByDate(null, null, defaultFilter()))
+                .willReturn(pageSale());
+        saleService.searchByDate(null, null, defaultFilter());
+        then(saleRepository).should().searchByDate(null, null, defaultFilter());
     }
 
 }

@@ -3,6 +3,7 @@ package br.com.beblue.domain.sale;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.Date;
 import java.util.Optional;
 
 public interface SaleRepository {
@@ -15,6 +16,6 @@ public interface SaleRepository {
 
     Optional<Sale> findById(Long id);
 
-    Page<Sale> findByDate( Pageable pageable);
+    Page<Sale> searchByDate(Date initialDate, Date finalDate, Pageable pageable);
 
 }

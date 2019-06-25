@@ -100,5 +100,4 @@ public interface SaleFixture {
                 .discDTO(discDTO())
                 .build();
     }
-
 }
