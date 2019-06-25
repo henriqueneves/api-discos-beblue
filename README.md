@@ -2,7 +2,7 @@
 
 Desafio para ingresso como desenvolvedor back-end no Beblue: API REST para um loja de discos de vinil que resolveu oferecer cashback em suas vendas.
 
-![Alt text](api-discos-beblue/src/main/resources/static/images/integration-image.png?raw=true "Integração de microsserviços")
+![image](src/main/resources/static/images/integration-image.png)
 
 ### Tecnologias
 - [Docker](https://www.docker.com/)
