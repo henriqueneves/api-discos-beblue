@@ -18,8 +18,8 @@ public class SaleRepositoryJpa  implements SaleRepository {
     }
 
     @Override
-    public void save(Sale sale) {
-        saleRepositorySpringData.save(sale);
+    public Sale save(Sale sale) {
+        return saleRepositorySpringData.save(sale);
     }
 
     @Override

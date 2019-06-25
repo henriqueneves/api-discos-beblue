@@ -31,7 +31,7 @@ public class SaleApplicationService implements SaleService {
 
     public void create(CreateSaleDTO createSaleDTO) {
         Sale sale = createSale(createSaleDTO);
-        saleRepository.save(sale);
+        sale = saleRepository.save(sale);
         cashbackProducer.sendMessageSale(createSaleDTO(sale));
     }
 

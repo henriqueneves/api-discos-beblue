@@ -11,6 +11,7 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import static br.com.beblue.resources.sale.SaleConstants.SALE_ID;
 import static br.com.beblue.resources.sale.SaleFixture.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.then;
 
@@ -35,8 +36,10 @@ public class SaleApplicationServiceTest {
     @Test
     public void givenASaleDTOWhenRequestToCreateDiscThenInvokeRepositoryCreate(){
         CreateSaleDTO createSaleDTO = createSaleDTO();
+        given(saleRepository.save(any()))
+                .willReturn(sale());
         saleService.create(createSaleDTO);
-        then(saleRepository).should().save(sale());
+        then(saleRepository).should().save(any());
     }
 
     /* Edit */

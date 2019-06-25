@@ -13,9 +13,7 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-
 import static br.com.beblue.resources.TestsConstants.GSON;
-import static br.com.beblue.resources.disc.DiscFixture.discDTOWithIdOnly;
 import static br.com.beblue.resources.sale.SaleConstants.SALE_ID;
 import static br.com.beblue.resources.sale.SaleFixture.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -78,29 +76,6 @@ public class SaleControllerTest {
     }
 
     @Test
-    public void givenDiscWhenRequestToEditThenShouldReturnNoContent() throws Exception {
-        mockMvc.perform(put("/sales")
-                .contentType(APPLICATION_JSON_UTF8)
-                .content(GSON.toJson(saleDTO())))
-                .andDo(print())
-                .andExpect(status().isNoContent());
-
-        then(saleService).should().edit(saleDTO());
-    }
-
-    @Test
-    public void givenInvalidSaleWhenRequestToEditThenShouldReturnBadRequest() throws Exception {
-        mockMvc.perform(put("/sales")
-                .contentType(APPLICATION_JSON_UTF8)
-                .content(GSON.toJson(invalidSaleDTO())))
-                .andDo(print())
-                .andExpect(status().isBadRequest());
-
-        then(saleService).should(never()).edit(invalidSaleDTO());
-
-    }
-
-    @Test
     public void givenIdWhenRequestToDeleteSaleThenShouldReturnNoContent() throws Exception {
         mockMvc.perform(delete("/sales/" + SALE_ID)
                 .contentType(APPLICATION_JSON_UTF8)
@@ -145,7 +120,5 @@ public class SaleControllerTest {
                 .perform(get("/sales/{id}", SALE_ID).contentType(APPLICATION_JSON_UTF8))
                 .andExpect(status().isNotFound());
     }
-
-
 
 }

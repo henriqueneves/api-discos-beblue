@@ -165,6 +165,4 @@ public class DiscControllerTest {
 
         then(discService).should(never()).findByGenreOrderByName(null, defaultFilter().toPageable());
     }
-
-
 }

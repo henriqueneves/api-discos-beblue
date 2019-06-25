@@ -27,12 +27,6 @@ public class SaleController {
         return noContent().build();
     }
 
-    @PutMapping
-    public ResponseEntity<Void> editSale(@RequestBody @Valid SaleDTO saleDTO) {
-        saleService.edit(saleDTO);
-        return noContent().build();
-    }
-
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteSale(@PathVariable Long id){
         saleService.delete(SaleDTO.builder().id(id).build());

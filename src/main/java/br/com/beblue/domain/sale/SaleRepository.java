@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface SaleRepository {
 
-    void save(Sale sale);
+    Sale save(Sale sale);
 
     void edit(Sale sale);
 
