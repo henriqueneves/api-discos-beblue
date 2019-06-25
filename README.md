@@ -1,6 +1,6 @@
 # Desafio Beblue - Engenheiro Back-end
 
-Desafio para ingresso como desenvolvedor back-end no Beblue: API REST para um loja de discos de vinil que resolveu oferecer cashback em suas vendas.
+Desafio para ingresso como desenvolvedor back-end no Beblue: API REST para uma loja de discos de vinil que resolveu oferecer cashback em suas vendas.
 
 ![image](src/main/resources/static/images/integration-image.png)
 
