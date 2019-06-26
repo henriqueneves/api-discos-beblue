@@ -46,9 +46,6 @@ public class SaleFactory {
                 .build();
     }
 
-
-
-
     public static List<DiscSale> createListDiscSale(List<DiscSaleDTO> discSaleDTO){
         return discSaleDTO == null ? new ArrayList() : discSaleDTO.stream().map(SaleFactory::createDiscSale).collect(toList());
     }

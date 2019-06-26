@@ -35,7 +35,7 @@ public class SaleRepositoryJpaTest {
     public void givenAValidSaleWhenSaveThenDelegateToJpaRepository() {
         Sale sale = sale();
         saleRepository.save(sale);
-        then(saleRepositorySpringData).should().save(sale);
+        then(saleRepositorySpringData).should().saveAndFlush(sale);
     }
 
     @Test

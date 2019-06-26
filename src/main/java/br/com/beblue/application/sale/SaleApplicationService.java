@@ -2,6 +2,9 @@ package br.com.beblue.application.sale;
 
 import br.com.beblue.application.sale.dto.CreateSaleDTO;
 import br.com.beblue.application.sale.dto.SaleDTO;
+import br.com.beblue.domain.disc.Disc;
+import br.com.beblue.domain.disc.DiscRepository;
+import br.com.beblue.domain.sale.DiscSale;
 import br.com.beblue.domain.sale.Sale;
 import br.com.beblue.domain.sale.SaleRepository;
 import br.com.beblue.ports.adapters.messaging.CashbackProducer;
@@ -11,9 +14,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
-
 import static br.com.beblue.application.sale.SaleFactory.createSale;
 import static br.com.beblue.application.sale.SaleFactory.createSaleDTO;
 
@@ -21,22 +25,32 @@ import static br.com.beblue.application.sale.SaleFactory.createSaleDTO;
 @Transactional
 public class SaleApplicationService implements SaleService {
 
-
     private final SaleRepository saleRepository;
-
+    private final DiscRepository discRepository;
     private final CashbackProducer cashbackProducer;
 
-
-    public SaleApplicationService(SaleRepository saleRepository, CashbackProducer cashbackProducer) {
+    public SaleApplicationService(
+            SaleRepository saleRepository,
+            CashbackProducer cashbackProducer,
+            DiscRepository discRepository
+    ) {
         this.saleRepository = saleRepository;
         this.cashbackProducer = cashbackProducer;
+        this.discRepository = discRepository;
     }
 
     @Override
     public void create(CreateSaleDTO createSaleDTO) {
         Sale sale = createSale(createSaleDTO);
+        sale.discSales(loadDiscSales(sale));
+        sale.calculeValueTotal();
+        sale.registerNow();
         sale = saleRepository.save(sale);
-        cashbackProducer.sendMessageSale(createSaleDTO(sale));
+
+        sale = saleRepository.findById(sale.id()).get();
+        cashbackProducer.sendMessageSale(
+                createSaleDTO(sale)
+        );
     }
 
     @Override
@@ -60,5 +74,18 @@ public class SaleApplicationService implements SaleService {
         return saleRepository.searchByDate(initialDate, finalDate, pageable).map(SaleFactory::createSaleDTO);
     }
 
-
+    private List<DiscSale> loadDiscSales(Sale sale){
+        List<DiscSale> returnDiscSales = new ArrayList<>();
+        for(DiscSale discSale : sale.discSales()){
+             Disc disc = discRepository.findById(discSale.id()).get();
+            returnDiscSales.add(
+                    DiscSale.builder()
+                            .disc(disc)
+                            .saleValue(disc.price())
+                            .sale(sale)
+                            .build()
+            );
+        }
+        return returnDiscSales;
+    }
 }

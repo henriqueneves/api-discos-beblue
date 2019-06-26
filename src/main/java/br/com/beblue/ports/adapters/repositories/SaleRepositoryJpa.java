@@ -20,7 +20,7 @@ public class SaleRepositoryJpa  implements SaleRepository {
 
     @Override
     public Sale save(Sale sale) {
-        return saleRepositorySpringData.save(sale);
+        return saleRepositorySpringData.saveAndFlush(sale);
     }
 
     @Override
