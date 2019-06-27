@@ -25,6 +25,7 @@ public class Sale {
     private Long id;
     @OneToMany(mappedBy = "sale", cascade = CascadeType.ALL)
     @NotNull
+    @OrderBy("id ASC")
     private List<DiscSale> discSales = new ArrayList();
     private BigDecimal valueTotal;
     private BigDecimal cashbackTotal;

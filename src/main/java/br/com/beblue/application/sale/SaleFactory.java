@@ -1,15 +1,14 @@
 package br.com.beblue.application.sale;
 
 import br.com.beblue.application.disc.DiscFactory;
-import br.com.beblue.application.sale.dto.CreateSaleDTO;
-import br.com.beblue.application.sale.dto.DiscSaleDTO;
-import br.com.beblue.application.sale.dto.SaleDTO;
+import br.com.beblue.application.sale.dto.*;
 import br.com.beblue.domain.sale.DiscSale;
 import br.com.beblue.domain.sale.Sale;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -86,4 +85,5 @@ public class SaleFactory {
                 .build();
 
     }
+
 }

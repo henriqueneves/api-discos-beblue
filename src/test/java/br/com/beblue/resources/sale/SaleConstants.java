@@ -20,5 +20,7 @@ public class SaleConstants {
 
     public static final Long[] CREATE_DISC_SALE_ID = {SALE_ID};
 
+    public static final Date MAX_DATE = new Date(Long.MAX_VALUE);
+    public static  final Date MIN_DATE = new Date(Long.MIN_VALUE);
 
 }

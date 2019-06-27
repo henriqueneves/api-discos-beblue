@@ -12,7 +12,9 @@ import java.util.Date;
 
 public interface SaleRepositorySpringData extends JpaRepository<Sale, Long> {
 
-    @Query("FROM Sale s WHERE s.register >= :initialDate and s.register <= :finalDate")
+    @Query("FROM Sale s WHERE s.register between :initialDate and :finalDate")
     Page<Sale> searchByDate(@Param("initialDate")  Date initialDate, @Param("finalDate") Date finalDate, Pageable pageable);
 
+
+    Page<Sale> findByRegisterBetween(Date initialDate, Date finalDate, Pageable pageable);
 }

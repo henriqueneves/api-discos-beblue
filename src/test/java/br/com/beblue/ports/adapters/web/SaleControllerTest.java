@@ -13,11 +13,15 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+
+import java.util.Date;
+
 import static br.com.beblue.resources.TestsConstants.GSON;
 import static br.com.beblue.resources.disc.DiscFixture.defaultFilter;
-import static br.com.beblue.resources.sale.SaleConstants.SALE_ID;
+import static br.com.beblue.resources.sale.SaleConstants.*;
 import static br.com.beblue.resources.sale.SaleFixture.*;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyObject;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.then;
 import static org.mockito.Mockito.never;
@@ -129,7 +133,7 @@ public class SaleControllerTest {
                 .perform(get("/sales/search/"))
                 .andExpect(status().isOk());
 
-        then(saleService).should().searchByDate(null, null, defaultFilter().toPageable());
+        then(saleService).should().searchByDate(MIN_DATE, MAX_DATE, defaultFilter().toPageable());
 
     }
 

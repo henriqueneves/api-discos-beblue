@@ -40,6 +40,6 @@ public class SaleRepositoryJpa  implements SaleRepository {
 
     @Override
     public Page<Sale> searchByDate(Date initialDate, Date finalDate, Pageable pageable) {
-        return saleRepositorySpringData.searchByDate(initialDate, finalDate, pageable);
+        return saleRepositorySpringData.findByRegisterBetween(initialDate, finalDate, pageable);
     }
 }

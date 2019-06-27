@@ -91,9 +91,7 @@ Em breve
   * Exemplo BODY - RAW:
   ```
   {
-    "name": "Disco personalizado",
-    "genre": "ROCK",
-    "price": 42.42
+    "discsID": [ 11, 22, 32 ]
   }
   ```
   
@@ -112,6 +110,35 @@ Em breve
   * Parâmetros opcionais: page, size (max = 1000)
   * GET: [http://localhost:8080/discs/search/**ROCK**?page=**1**&size=**10**](http://localhost:8080/discs/search/ROCK?page=1&size=10)
 
+### Cashback
+Serviço simulado: as mensagens de vendas são recebidas pelo RabbitMQ e o 
+envio das respostas é feito manualmente, simulando a resposta de um terceiro.
+
+* Simular cálculo do Cashback
+  * No RabbitMQ, localizar a queue **cashback-calculated**
+  * Publicar nova mensagem em **Publish message**.
+  * Exemplo Payload:
+  ```
+  {
+      "idSale": 1,
+      "discs": [
+          {
+              "idDiscSale": 1,
+              "cashbackValue": 12.50
+          },
+  		{
+              "idDiscSale": 2,
+              "cashbackValue": 5.30
+          },
+          {
+              "idDiscSale": 3,
+              "cashbackValue": 11.30
+          }
+      ],
+      "cashbackTotal": 29.10
+  }
+  ```
+  
 
 ## Observações:
 

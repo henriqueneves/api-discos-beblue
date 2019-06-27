@@ -14,6 +14,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import java.util.Optional;
 
 import static br.com.beblue.resources.disc.DiscFixture.defaultFilter;
+import static br.com.beblue.resources.disc.DiscFixture.disc;
 import static br.com.beblue.resources.sale.SaleConstants.SALE_ID;
 import static br.com.beblue.resources.sale.SaleFixture.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -40,8 +41,10 @@ public class SaleApplicationServiceTest {
     }
 
     @Test
-    public void givenASaleDTOWhenRequestToCreateDiscThenInvokeRepositoryCreate(){
+    public void givenASaleDTOWhenRequestToCreateSaleThenInvokeRepositoryCreate(){
         CreateSaleDTO createSaleDTO = createSaleDTO();
+        given(discRepository.findById(any()))
+                .willReturn(Optional.of(disc()));
         given(saleRepository.save(any()))
                 .willReturn(sale());
         given(saleRepository.findById(any()))

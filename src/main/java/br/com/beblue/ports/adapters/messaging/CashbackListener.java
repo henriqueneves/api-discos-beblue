@@ -1,6 +1,7 @@
 package br.com.beblue.ports.adapters.messaging;
 
 import br.com.beblue.application.sale.SaleService;
+import br.com.beblue.application.sale.dto.CalculatedCashbackDTO;
 import br.com.beblue.application.sale.dto.SaleDTO;
 import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.messaging.handler.annotation.Payload;
@@ -19,8 +20,8 @@ public class CashbackListener {
     }
 
     @StreamListener(CASHBACK_INPUT)
-    public void saveCashbackSale(@Payload @Valid SaleDTO saleDTO) {
-        saleService.edit(saleDTO);
+    public void saveCashbackSale(@Payload @Valid CalculatedCashbackDTO calculatedCashbackDTO) {
+        saleService.updateCashback(calculatedCashbackDTO);
     }
 
 }

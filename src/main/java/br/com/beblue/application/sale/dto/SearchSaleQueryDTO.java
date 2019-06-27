@@ -15,7 +15,7 @@ import java.util.Date;
 public class SearchSaleQueryDTO {
 
     @DateTimeFormat(pattern = "dd-MM-yyyy")
-    private Date start = new Date(Long.MIN_VALUE);
+    private Date start = new Date(0);
 
     @DateTimeFormat(pattern = "dd-MM-yyyy")
     private Date end = new Date(Long.MAX_VALUE);
